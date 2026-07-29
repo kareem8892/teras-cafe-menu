@@ -1,94 +1,2964 @@
-```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soon - الموقع قيد الصيانة</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #0b0b0b;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-        .box {
-            width: 90%;
-            max-width: 600px;
-            padding: 50px 25px;
-            background: #151515;
-            border-radius: 20px;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.08);
-        }
+<title>تَرَس كافيه</title>
 
-        .icon {
-            font-size: 60px;
-            margin-bottom: 15px;
-        }
+<!-- شعار علامة التبويب -->
+<link rel="icon" type="image/png" href="شعار ترس.png">
 
-        h1 {
-            font-size: 42px;
-            margin: 10px 0;
-        }
+<style>
 
-        h2 {
-            font-size: 24px;
-            margin: 15px 0;
-        }
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
 
-        p {
-            color: #bbb;
-            font-size: 18px;
-            line-height: 1.8;
-        }
+html{
+scroll-behavior:smooth;
+}
 
-        .loading {
-            margin: 25px auto 0;
-            width: 45px;
-            height: 45px;
-            border: 4px solid #333;
-            border-top: 4px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
+body{
+font-family:Tahoma,Arial,sans-serif;
+background:#080808;
+color:#fff;
+min-height:100vh;
+transition:background .3s,color .3s;
+}
 
-        @keyframes spin {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
+body.light-mode{
+background:#f4f4f4;
+color:#171717;
+}
+
+/* الصفحة الرئيسية */
+
+#homePage{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:25px;
+background:radial-gradient(
+circle at center,
+#292929 0%,
+#0b0b0b 55%,
+#000 100%
+);
+}
+
+.home-logo{
+width:200px;
+height:200px;
+object-fit:contain;
+margin-bottom:20px;
+filter:drop-shadow(
+0 0 25px
+rgba(255,255,255,.15)
+);
+}
+
+.home-title{
+font-size:48px;
+font-weight:bold;
+letter-spacing:3px;
+margin-bottom:25px;
+}
+
+.menu-button{
+border:none;
+background:linear-gradient(
+135deg,
+#d4af37,
+#f5d77a
+);
+color:#111;
+padding:17px 45px;
+border-radius:15px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+.menu-button:hover{
+transform:translateY(-4px);
+box-shadow:
+0 10px 30px
+rgba(212,175,55,.35);
+}
+
+.home-note{
+margin-top:20px;
+font-size:15px;
+color:#ffcc66;
+}
+
+/* صفحة المنيو */
+
+#menuPage{
+display:none;
+}
+
+/* الهيدر */
+
+header{
+position:sticky;
+top:0;
+z-index:1000;
+background:rgba(8,8,8,.97);
+backdrop-filter:blur(15px);
+border-bottom:1px solid #292929;
+padding:12px 15px;
+}
+
+.header-content{
+max-width:1450px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:flex-start;
+gap:12px;
+direction:rtl;
+}
+
+.header-logo{
+width:58px;
+height:58px;
+object-fit:contain;
+display:block;
+}
+
+.header-name{
+font-size:29px;
+font-weight:bold;
+letter-spacing:2px;
+color:#fff;
+}
+
+/* أزرار الأقسام */
+
+.categories{
+max-width:1450px;
+margin:12px auto 0;
+padding:5px;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+align-items:center;
+gap:10px;
+width:100%;
+}
+
+.category-btn{
+border:1px solid #3b3b3b;
+background:#151515;
+color:#eee;
+padding:11px 17px;
+border-radius:12px;
+cursor:pointer;
+font-family:inherit;
+font-weight:bold;
+font-size:14px;
+white-space:nowrap;
+transition:.25s;
+}
+
+.category-btn:hover{
+background:#d4af37;
+color:#111;
+border-color:#d4af37;
+transform:translateY(-2px);
+}
+
+.category-btn.active{
+background:#d4af37;
+color:#111;
+border-color:#d4af37;
+}
+
+/* حساباتنا */
+
+.accounts{
+position:relative;
+}
+
+.accounts-menu{
+display:none;
+position:absolute;
+top:52px;
+right:50%;
+transform:translateX(50%);
+background:#151515;
+border:1px solid #383838;
+border-radius:15px;
+padding:10px;
+width:280px;
+box-shadow:0 15px 40px rgba(0,0,0,.8);
+z-index:1500;
+}
+
+.accounts-menu.show{
+display:block;
+}
+
+.social-btn{
+display:flex;
+align-items:center;
+gap:12px;
+width:100%;
+padding:12px;
+margin:5px 0;
+border:none;
+border-radius:10px;
+color:white;
+text-decoration:none;
+font-weight:bold;
+font-family:inherit;
+cursor:pointer;
+transition:.25s;
+}
+
+.social-btn:hover{
+transform:scale(1.03);
+filter:brightness(1.15);
+}
+
+.social-icon{
+width:32px;
+height:32px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:20px;
+border-radius:8px;
+}
+
+.facebook{
+background:#1877F2;
+}
+
+.instagram{
+background:linear-gradient(
+45deg,
+#feda75,
+#d62976,
+#4f5bd5
+);
+}
+
+.tiktok{
+background:#050505;
+border:1px solid #444;
+}
+
+.contact-btn{
+background:#333;
+}
+
+.contact-btn:hover{
+background:#444;
+}
+
+/* زر الإضاءة */
+
+.theme-btn{
+background:#222;
+color:#fff;
+border:1px solid #444;
+}
+
+.theme-btn:hover{
+background:#d4af37;
+color:#111;
+}
+
+/* المحتوى */
+
+.container{
+max-width:1450px;
+margin:auto;
+padding:20px;
+}
+
+.section-title{
+text-align:center;
+color:#d4af37;
+font-size:31px;
+margin:20px 0 25px;
+}
+
+.items-grid{
+display:grid;
+grid-template-columns:
+repeat(
+auto-fit,
+minmax(240px,1fr)
+);
+gap:18px;
+}
+
+/* بطاقة الصنف */
+
+.item{
+background:linear-gradient(
+145deg,
+#181818,
+#101010
+);
+border:1px solid #2c2c2c;
+border-radius:18px;
+padding:20px;
+min-height:175px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+transition:.25s;
+}
+
+.item:hover{
+transform:translateY(-4px);
+border-color:#d4af37;
+box-shadow:
+0 12px 35px
+rgba(0,0,0,.5);
+}
+
+.item-name{
+font-size:18px;
+font-weight:bold;
+line-height:1.7;
+}
+
+.item-description{
+color:#aaa;
+font-size:13px;
+line-height:1.7;
+margin-top:8px;
+}
+
+.item-bottom{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+margin-top:20px;
+}
+
+.price{
+color:#d4af37;
+font-size:19px;
+font-weight:bold;
+}
+
+.add-btn{
+border:none;
+background:#d4af37;
+color:#111;
+padding:10px 14px;
+border-radius:10px;
+cursor:pointer;
+font-weight:bold;
+font-family:inherit;
+}
+
+.add-btn:hover{
+background:#f5d77a;
+}
+
+/* زر السلة */
+
+.cart-btn{
+position:fixed;
+bottom:20px;
+left:20px;
+z-index:2000;
+border:none;
+background:#d4af37;
+color:#111;
+padding:15px 20px;
+border-radius:15px;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:
+0 8px 30px
+rgba(0,0,0,.7);
+}
+
+.cart-count{
+background:#c62828;
+color:white;
+border-radius:50%;
+padding:3px 7px;
+font-size:12px;
+margin-right:5px;
+}
+
+/* الوضع العادي */
+
+body.light-mode header{
+background:rgba(255,255,255,.97);
+border-bottom:1px solid #ddd;
+}
+
+body.light-mode .header-name{
+color:#222;
+}
+
+body.light-mode .category-btn{
+background:#fff;
+color:#222;
+border-color:#ddd;
+}
+
+body.light-mode .item{
+background:#fff;
+color:#222;
+border-color:#ddd;
+}
+
+body.light-mode .item-description{
+color:#666;
+}
+
+/* الكمبيوتر */
+
+@media(min-width:1000px){
+
+.items-grid{
+grid-template-columns:repeat(4,1fr);
+}
+
+.category-btn{
+font-size:15px;
+padding:12px 19px;
+}
+
+}
+
+/* الآيباد */
+
+@media(min-width:601px) and (max-width:999px){
+
+.items-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+/* الجوال */
+
+@media(max-width:600px){
+
+.home-logo{
+width:150px;
+height:150px;
+}
+
+.home-title{
+font-size:38px;
+}
+
+.header-logo{
+width:50px;
+height:50px;
+}
+
+.header-name{
+font-size:23px;
+}
+
+.categories{
+justify-content:center;
+gap:7px;
+}
+
+.category-btn{
+font-size:12px;
+padding:10px 12px;
+}
+
+.items-grid{
+grid-template-columns:1fr;
+}
+
+.cart-btn{
+left:12px;
+bottom:12px;
+}
+
+.accounts-menu{
+position:fixed;
+top:130px;
+left:15px;
+right:15px;
+width:auto;
+transform:none;
+}
+
+}
+
+</style>
+
 </head>
 
 <body>
 
-    <div class="box">
-        <div class="icon">🛠️</div>
+<!-- الصفحة الرئيسية -->
 
-        <h1>SOON</h1>
+<div id="homePage">
 
-        <h2>الرجاء المحاولة فيما بعد</h2>
+<img
+src="شعار ترس.png"
+class="home-logo"
+alt="شعار تَرَس كافيه">
 
-        <p>
-            يتم الآن حل المشكلة وتحديث الموقع.
-            <br>
-            نعتذر عن الإزعاج، وشكرًا لصبركم.
-        </p>
+<h1 class="home-title">
+تَرَس كافيه
+</h1>
 
-        <div class="loading"></div>
-    </div>
+<button
+class="menu-button"
+onclick="openMenu()">
+
+عرض المنيو 🍴
+
+</button>
+
+<div class="home-note">
+
+ملاحظة: قد يؤدي إلى الإدمان ☢️
+
+</div>
+
+</div>
+
+<!-- صفحة الموقع -->
+
+<div id="menuPage">
+
+<header>
+
+<div class="header-content">
+
+<img
+src="شعار ترس.png"
+class="header-logo"
+alt="شعار تَرَس كافيه">
+
+<div class="header-name">
+تَرَس كافيه
+</div>
+
+</div>
+
+<div
+class="categories"
+id="categories">
+
+</div>
+
+</header>
+
+<div
+class="container"
+id="menuContainer">
+
+</div>
+
+</div>
+
+<!-- زر السلة -->
+
+<button
+class="cart-btn"
+onclick="openCart()">
+
+السلة 🗑️
+
+<span
+class="cart-count"
+id="cartCount">
+
+0
+
+</span>
+
+</button>
+
+<script>
+
+/* فتح الموقع */
+
+function openMenu(){
+
+document.getElementById("homePage").style.display="none";
+
+document.getElementById("menuPage").style.display="block";
+
+createCategories();
+
+}
+
+/* إنشاء الأقسام */
+
+function createCategories(){
+
+const categories=
+document.getElementById("categories");
+
+categories.innerHTML="";
+
+const sectionNames=[
+
+"الفطور",
+"المقبلات",
+"ساندويشات",
+"السلطات",
+"الوجبات الرئيسية",
+"مطبخ إيطالي",
+"بيتزا",
+"بحري",
+"ايسات",
+"ميلك شيك",
+"موكتيل",
+"عصائر طبيعية",
+"نكهات ترس الحصرية",
+"حلويات",
+"مشروبات ساخنة",
+"مشروبات باردة",
+"الأراجيل"
+
+];
+
+sectionNames.forEach(
+
+(category,index)=>{
+
+const button=
+document.createElement("button");
+
+button.className="category-btn";
+
+if(index===0){
+
+button.classList.add("active");
+
+}
+
+button.innerText=category;
+
+button.onclick=()=>{
+
+showCategory(category,button);
+
+};
+
+categories.appendChild(button);
+
+});
+
+/* حساباتنا */
+
+const accounts=
+document.createElement("div");
+
+accounts.className="accounts";
+
+accounts.innerHTML=`
+
+<button
+class="category-btn"
+onclick="toggleAccounts(event)">
+
+حساباتنا
+
+</button>
+
+<div
+class="accounts-menu"
+id="accountsMenu">
+
+<a
+class="social-btn facebook"
+href="https://www.facebook.com/share/16BH7YpP58s/"
+target="_blank">
+
+<span class="social-icon">
+f
+</span>
+
+صفحتنا على الفيسبوك
+
+</a>
+
+<a
+class="social-btn instagram"
+href="https://www.instagram.com/tarra_ce?igsh=MW5ueGpya2cyczhkeQ=="
+target="_blank">
+
+<span class="social-icon">
+◎
+</span>
+
+تابعنا على الإنستغرام
+
+</a>
+
+<a
+class="social-btn tiktok"
+href="https://www.tiktok.com/@tarrace_?_r=1&_t=ZS-98PMCiJpfYQ"
+target="_blank">
+
+<span class="social-icon">
+♪
+</span>
+
+تابعنا على تيك توك
+
+</a>
+
+<a
+class="social-btn contact-btn"
+href="tel:+970598989595">
+
+<span class="social-icon">
+📞
+</span>
+
+اتصل بنا: +970 598 989 595
+
+</a>
+
+</div>
+
+`;
+
+categories.appendChild(accounts);
+
+/* زر الإضاءة */
+
+const themeButton=
+document.createElement("button");
+
+themeButton.className=
+"category-btn theme-btn";
+
+themeButton.innerText=
+"☀️ إضاءة عادية";
+
+themeButton.onclick=
+toggleTheme;
+
+categories.appendChild(themeButton);
+
+}
+
+/* حساباتنا */
+
+function toggleAccounts(event){
+
+event.stopPropagation();
+
+const menu=
+document.getElementById("accountsMenu");
+
+menu.classList.toggle("show");
+
+}
+
+/* الوضع الليلي / العادي */
+
+function toggleTheme(){
+
+document.body.classList.toggle("light-mode");
+
+const button=
+document.querySelector(".theme-btn");
+
+if(
+document.body.classList.contains("light-mode")
+){
+
+button.innerText=
+"🌙 الوضع الليلي";
+
+}else{
+
+button.innerText=
+"☀️ إضاءة عادية";
+
+}
+
+}
+
+/* عرض القسم */
+
+function showCategory(category,button){
+
+document
+.querySelectorAll(".category-btn")
+.forEach(btn=>{
+
+btn.classList.remove("active");
+
+});
+
+if(button){
+
+button.classList.add("active");
+
+}
+
+const container=
+document.getElementById("menuContainer");
+
+container.innerHTML=`
+
+<h2 class="section-title">
+
+${category}
+
+</h2>
+
+<div class="items-grid">
+
+<div class="item">
+
+<div class="item-name">
+
+سيتم تحميل الأصناف...
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+/* السلة */
+
+function openCart(){
+
+alert(
+"سيتم فتح السلة في الجزء الثالث"
+);
+
+}
+
+/* إغلاق قائمة الحسابات */
+
+document.addEventListener(
+
+"click",
+
+function(){
+
+const menu=
+document.getElementById("accountsMenu");
+
+if(menu){
+
+menu.classList.remove("show");
+
+}
+
+}
+
+);
+
+</script>
 
 </body>
+
 </html>
-```
+<script>
+
+/* =========================
+بيانات المنيو كاملة
+========================= */
+
+const menuData = {
+
+"الفطور":[
+["فطور ترس","زيت، زعتر، حلاوة، مربى، لبنة، مخللات، فول، أومليت، بندورة مقلية، أفوكادو",35],
+["منقوشات ترس","",20],
+["صفيحة تركية","",25],
+["مناقيش جبنة بيضا","",18],
+["مناقيش زعتر","",15],
+["منقوشة بيستو","",20],
+["فوكاتشا","",20]
+],
+
+"المقبلات":[
+["حمص","",10],
+["كبة مقلية","5 حبات",25],
+["سمبوسك","5 حبات - جبنة / لحمة",25],
+["بطاطا شيبس","",15],
+["كيرلي","",20],
+["أصابع موزاريلا","",30],
+["خبز مثوم","6 قطع",15],
+["أصابع دجاج","5 أصابع زنجر",35],
+["ناتشوز","",30],
+["كرات بطاطا مقلية","",20],
+["يلنجي","",25],
+["جمبري مقلي","",45]
+],
+
+"ساندويشات":[
+["بولو","دجاج فطر بالكريما",30],
+["ستيك دجاج","",28],
+["زنجر","",28],
+["برجر لحم عجل","",32],
+["برجر لحم عجل مع جبنة","",35],
+["فاهيتا دجاج","",28],
+["شاورما","",30],
+["فاهيتا لحم","",35]
+],
+
+"السلطات":[
+["سلطة غزاوية","مزيج ممتاز مع أطباق السمك",28],
+["تبولة","",20],
+["سلطة كينوا","",20],
+["سيزر دجاج","",25],
+["سيزر بدون دجاج","",20],
+["جرجير","",20],
+["يونانية","",20],
+["فتوش","",20],
+["سلطة شاورمة","",30],
+["سلطة حلومي","",30],
+["سلطة فواكه البحر","",45]
+],
+
+"الوجبات الرئيسية":[
+["ستيك دجاج فطر وكريما","مع خضار سوتية وماش بوتيتو - 3 شرائح",45],
+["ستيك دجاج ليمون وثوم","مع خضار سوتية وماش بوتيتو - 3 شرائح",45],
+["ستيك دجاج بيستو","مع خضار سوتية وماش بوتيتو - 3 شرائح",45],
+["ستيك فيليه عجل","تندرلوين - 250 غم مع خضار سوتية وماش بوتيتو",70],
+["ستيك انتريكوت","ريب آي - 300 غم مع خضار سوتية وماش بوتيتو",75],
+["جوردن بلو","رول صدر دجاج محشي بالجبنة الهولندية وشرائح لحم سلامي وزيتون، مقلي بالقرشلة ويقدم مع خضار سوتية وماش بوتيتو",45],
+["فاهيتا دجاج","شرائح مقطعة من صدر الدجاج مع صلصة الشيف الخاصة وفليفلة حلوة وفطر طازج وبصل وبندورة شيري تقدم مع أرز",40],
+["فاهيتا لحم","شرائح مقطعة من لحم العجل مع صلصة الشيف الخاصة وفليفلة حلوة وفطر طازج وبصل وبندورة شيري تقدم مع أرز",50],
+["فخارة لحم","قطع لحم عجل طازج مطبوخة مع خضار وصلصة البندورة تقدم مع أرز",65],
+["فخارة دجاج","قطع صدر دجاج مطبوخة مع خضار وصلصة البندورة تقدم مع أرز",50],
+["فخارة جمبري","10 قطع جمبري جامبو مطبوخ مع صلصة الكريمة والفطر الطازج",65],
+["إضافة صحن أرز","",10]
+],
+
+"مطبخ إيطالي":[
+["فوتوتشيني ألفريد","",40],
+["فوتوتشيني مع دجاج","",45],
+["لازانيا لحمة","",45],
+["بيني بيستو","",40],
+["بيني بيستو مع دجاج","",45],
+["سترجنوف دجاج","",45],
+["سترجنوف لحم","",55]
+],
+
+"بيتزا":[
+["خضار","",40],
+["ببروني","",45],
+["مارجريتا","",40],
+["نقانق","",45],
+["دجاج باربيكيو","",45]
+],
+
+"بحري":[
+["ستيك سالمون","320 غم ستيك سالمون مشوي بالفرن مع خضار سوتيه تقدم مع صلصة الشيف الخاصة",70],
+["فيليه مسقار","شريحة سمك سكاروس مشوي بالفرن تقدم مع خضار سوتيه من حوض البحر الأحمر المتوسط",50],
+["دنيس مشوي","سمكة دنيس مشوية بالفرن تقدم مع خضار سوتيه وصلصة الشيف الخاصة",50]
+],
+
+"ايسات":[
+["ايس كوفي","",15],
+["ايس كوفي دايت","",18],
+["ايس لاتيه","بندق / كراميل / فانيلا",15],
+["ايس تي خوخ","",15]
+],
+
+"ميلك شيك":[
+["فانيلا","",15],
+["شوكولاتة","",15],
+["نوتيلا","",18],
+["أوريو","",18],
+["لوتس","",18],
+["فراولة","",18],
+["بستاشيو وعسل","",18],
+["كراميل","",18],
+["مستكة","",18],
+["سيريلاك","",18],
+["كورنيتو","",18],
+["ترس ميلك شيك","",25]
+],
+
+"موكتيل":[
+["مكس موهيتو فراولة بطيخ","",17],
+["مكس موهيتو بلوباري رازبيري","",17],
+["مكس موهيتو أناناس مسفلورة","",17],
+["مكس موهيتو كيوي فراولة","",17],
+["مكس موهيتو توت بري وليمون","",17],
+["مكس حوامض","",17],
+["موهيتو ترس سبيشل","",18]
+],
+
+"عصائر طبيعية":[
+["برتقال","بدون سكر مضاف",18],
+["جزر","بدون سكر مضاف",18],
+["فراولة","",18],
+["مانجا","",18],
+["أناناس","",18],
+["ليمون ونعنع","",18],
+["مسفلورا","",18],
+["بطيخ وجبنة","",20],
+["فواكه صيفية مشكل","لشخصين",35]
+],
+
+"نكهات ترس الحصرية":[
+["بلو هاواي","",18],
+["سن سيت","",18],
+["جمايكا","",18],
+["أمبيانس","",18],
+["بو مور","",18],
+["بينا كولادا","",18],
+["كوكتيل سادة","",15],
+["كوكتيل فخفخينا","",18]
+],
+
+"حلويات":[
+["موس كيك","",20],
+["كريب كلاسيك","",20],
+["كريب سوشي","",22],
+["كريب بيستاشيو","",25],
+["كريب لوتس","",25],
+["فشافيش","",22],
+["وافل","",22],
+["سوفيلا","",20],
+["تشيز كيك","",20],
+["تيراميسو","",20],
+["بوظة مشكل","",15],
+["بوظة محشي","",18],
+["مكسرات اكسترا","",25],
+["كوكيز","",7]
+],
+
+"مشروبات ساخنة":[
+["قهوة عربية دبل","",7],
+["اسبرسو سنجل","",7],
+["اسبرسو دبل","",9],
+["كافيه لاتيه","",12],
+["كابوتشينو","",12],
+["أعشاب","",10],
+["نسكافيه","",10],
+["زهورات","",6],
+["هوت شوكليت إيطالي","",10],
+["هوت شوكليت","",12],
+["أفوكاتو","",14],
+["فرنش فانيلا","",12],
+["شاي","",6]
+],
+
+"مشروبات باردة":[
+["بفاريا","",7],
+["بلو","",7],
+["أكس إل","",7],
+["ريد بول","",9],
+["صودا","",7],
+["سبرايت / كولا / فانتا","",5],
+["فرشر","",5],
+["مياه معدنية كبيرة","",5]
+],
+
+"الأراجيل":[
+["ليمون ونعنع","",20],
+["LOVE 66","",20],
+["بطيخ ونعنع","",20],
+["بلوباري","",20],
+["سهم وقرفة","",20],
+["توت وعنب","",20],
+["روبي كرش","",20],
+["تفاحتين مزايا","",20],
+["تفاحتين نخلة","",25],
+["خلطة شامية","",25]
+]
+
+};
+
+
+/* =========================
+إنشاء الأقسام
+========================= */
+
+function createCategories(){
+
+const categories=
+document.getElementById("categories");
+
+categories.innerHTML="";
+
+
+Object.keys(menuData).forEach(
+
+(category,index)=>{
+
+const button=
+document.createElement("button");
+
+button.className=
+"category-btn";
+
+
+if(index===0){
+
+button.classList.add("active");
+
+}
+
+
+button.innerText=
+category;
+
+
+button.onclick=()=>{
+
+showCategory(
+category,
+button
+);
+
+};
+
+
+categories.appendChild(
+button
+);
+
+});
+
+
+/* حساباتنا */
+
+const accounts=
+document.createElement("div");
+
+accounts.className=
+"accounts";
+
+
+accounts.innerHTML=`
+
+<button
+class="category-btn"
+onclick="toggleAccounts(event)">
+
+حساباتنا
+
+</button>
+
+
+<div
+class="accounts-menu"
+id="accountsMenu">
+
+
+<a
+class="social-btn facebook"
+href="https://www.facebook.com/share/16BH7YpP58s/"
+target="_blank">
+
+<span class="social-icon">
+f
+</span>
+
+صفحتنا على الفيسبوك
+
+</a>
+
+
+<a
+class="social-btn instagram"
+href="https://www.instagram.com/tarra_ce?igsh=MW5ueGpya2cyczhkeQ=="
+target="_blank">
+
+<span class="social-icon">
+◎
+</span>
+
+تابعنا على الإنستغرام
+
+</a>
+
+
+<a
+class="social-btn tiktok"
+href="https://www.tiktok.com/@tarrace_?_r=1&_t=ZS-98PMCiJpfYQ"
+target="_blank">
+
+<span class="social-icon">
+♪
+</span>
+
+تابعنا على تيك توك
+
+</a>
+
+
+<a
+class="social-btn contact-btn"
+href="tel:+970598989595">
+
+<span class="social-icon">
+📞
+</span>
+
+اتصل بنا: +970 598 989 595
+
+</a>
+
+
+</div>
+
+`;
+
+
+categories.appendChild(
+accounts
+);
+
+
+/* زر الإضاءة */
+
+const themeButton=
+document.createElement("button");
+
+themeButton.className=
+"category-btn theme-btn";
+
+themeButton.innerText=
+document.body.classList.contains("light-mode")
+?
+"🌙 الوضع الليلي"
+:
+"☀️ إضاءة عادية";
+
+
+themeButton.onclick=
+toggleTheme;
+
+
+categories.appendChild(
+themeButton
+);
+
+}
+
+
+/* =========================
+عرض أصناف القسم
+========================= */
+
+function showCategory(
+
+category,
+
+button
+
+){
+
+document
+.querySelectorAll(".category-btn")
+.forEach(
+
+btn=>{
+
+btn.classList.remove("active");
+
+});
+
+
+if(button){
+
+button.classList.add("active");
+
+}
+
+
+const container=
+document.getElementById("menuContainer");
+
+container.innerHTML="";
+
+
+const title=
+document.createElement("h2");
+
+title.className=
+"section-title";
+
+title.innerText=
+category;
+
+container.appendChild(
+title
+);
+
+
+const grid=
+document.createElement("div");
+
+grid.className=
+"items-grid";
+
+
+menuData[category].forEach(
+
+(item,index)=>{
+
+const card=
+document.createElement("div");
+
+card.className=
+"item";
+
+
+card.innerHTML=`
+
+<div>
+
+<div class="item-name">
+
+${item[0]}
+
+</div>
+
+
+${
+item[1]
+?
+`
+
+<div class="item-description">
+
+${item[1]}
+
+</div>
+
+`
+:
+""
+}
+
+</div>
+
+
+<div class="item-bottom">
+
+<span class="price">
+
+${item[2]} ₪
+
+</span>
+
+
+<button
+class="add-btn"
+onclick="addToCart('${category}',${index})">
+
+أضف للسلة
+
+</button>
+
+
+</div>
+
+`;
+
+
+grid.appendChild(
+card
+);
+
+});
+
+
+container.appendChild(
+grid
+);
+
+}
+
+
+/* =========================
+تشغيل أول قسم تلقائيًا
+========================= */
+
+const oldOpenMenu=
+openMenu;
+
+
+openMenu=function(){
+
+document
+.getElementById("homePage")
+.style
+.display=
+"none";
+
+
+document
+.getElementById("menuPage")
+.style
+.display=
+"block";
+
+
+createCategories();
+
+
+showCategory(
+Object.keys(menuData)[0]
+);
+
+};
+
+</script>
+<script>
+
+/* =========================
+السلة
+========================= */
+
+let cart = [];
+
+
+/* =========================
+إضافة صنف للسلة
+========================= */
+
+function addToCart(category, index){
+
+const item =
+menuData[category][index];
+
+
+const existing =
+cart.find(
+
+product =>
+
+product.name === item[0] &&
+
+product.category === category
+
+);
+
+
+if(existing){
+
+existing.quantity++;
+
+}else{
+
+cart.push({
+
+category:category,
+
+name:item[0],
+
+description:item[1],
+
+price:item[2],
+
+quantity:1
+
+});
+
+}
+
+
+updateCartCount();
+
+
+showToast(
+"تمت إضافة " +
+item[0] +
+" إلى السلة 🛒"
+);
+
+}
+
+
+/* =========================
+تحديث عدد السلة
+========================= */
+
+function updateCartCount(){
+
+const count =
+
+cart.reduce(
+
+(total,item)=>
+
+total +
+item.quantity,
+
+0
+
+);
+
+
+document.getElementById(
+"cartCount"
+).innerText =
+count;
+
+}
+
+
+/* =========================
+رسالة الإضافة
+========================= */
+
+function showToast(message){
+
+const toast =
+document.createElement(
+"div"
+);
+
+
+toast.innerText =
+message;
+
+
+toast.style.position =
+"fixed";
+
+toast.style.bottom =
+"90px";
+
+toast.style.left =
+"50%";
+
+toast.style.transform =
+"translateX(-50%)";
+
+toast.style.background =
+"#d4af37";
+
+toast.style.color =
+"#111";
+
+toast.style.padding =
+"13px 22px";
+
+toast.style.borderRadius =
+"12px";
+
+toast.style.fontWeight =
+"bold";
+
+toast.style.zIndex =
+"9999";
+
+toast.style.boxShadow =
+"0 10px 30px rgba(0,0,0,.5)";
+
+
+document.body.appendChild(
+toast
+);
+
+
+setTimeout(
+
+()=>{
+
+toast.remove();
+
+},
+
+1800
+
+);
+
+}
+
+
+/* =========================
+فتح السلة
+========================= */
+
+function openCart(){
+
+const modal =
+document.getElementById(
+"cartModal"
+);
+
+
+modal.style.display =
+"flex";
+
+
+renderCart();
+
+}
+
+
+/* =========================
+إغلاق السلة
+========================= */
+
+function closeCart(){
+
+document.getElementById(
+"cartModal"
+).style.display =
+"none";
+
+}
+
+
+/* =========================
+عرض محتويات السلة
+========================= */
+
+function renderCart(){
+
+const cartItems =
+document.getElementById(
+"cartItems"
+);
+
+
+const totalElement =
+document.getElementById(
+"cartTotal"
+);
+
+
+cartItems.innerHTML =
+"";
+
+
+if(cart.length === 0){
+
+cartItems.innerHTML = `
+
+<div class="empty-cart">
+
+🛒
+
+<br><br>
+
+السلة فارغة
+
+<br>
+
+أضف الأصناف التي تريدها من المنيو
+
+</div>
+
+`;
+
+
+totalElement.innerText =
+"0 ₪";
+
+
+return;
+
+}
+
+
+let total =
+0;
+
+
+cart.forEach(
+
+(item,index)=>{
+
+const itemTotal =
+item.price *
+item.quantity;
+
+
+total +=
+itemTotal;
+
+
+const cartItem =
+document.createElement(
+"div"
+);
+
+
+cartItem.className =
+"cart-item";
+
+
+cartItem.innerHTML = `
+
+<div class="cart-item-info">
+
+<div class="cart-item-name">
+
+${item.name}
+
+</div>
+
+<div class="cart-item-category">
+
+${item.category}
+
+</div>
+
+<div class="cart-item-price">
+
+${item.price} ₪ ×
+${item.quantity}
+=
+${itemTotal} ₪
+
+</div>
+
+</div>
+
+
+<div class="quantity-control">
+
+<button
+onclick="changeQuantity(${index},1)">
+
++
+
+</button>
+
+
+<span>
+
+${item.quantity}
+
+</span>
+
+
+<button
+onclick="changeQuantity(${index},-1)">
+
+−
+
+</button>
+
+</div>
+
+
+<button
+class="remove-item"
+onclick="removeFromCart(${index})">
+
+🗑️
+
+</button>
+
+`;
+
+
+cartItems.appendChild(
+cartItem
+);
+
+}
+
+);
+
+
+totalElement.innerText =
+total +
+" ₪";
+
+}
+
+
+/* =========================
+تغيير الكمية
+========================= */
+
+function changeQuantity(
+index,
+amount
+){
+
+cart[index].quantity +=
+amount;
+
+
+if(
+cart[index].quantity <= 0
+){
+
+cart.splice(
+index,
+1
+);
+
+}
+
+
+updateCartCount();
+
+renderCart();
+
+}
+
+
+/* =========================
+حذف صنف
+========================= */
+
+function removeFromCart(index){
+
+cart.splice(
+index,
+1
+);
+
+
+updateCartCount();
+
+renderCart();
+
+}
+
+
+/* =========================
+إظهار نموذج الطلب
+========================= */
+
+function openOrderForm(){
+
+if(cart.length === 0){
+
+showToast(
+"السلة فارغة، أضف أصناف أولاً 🛒"
+);
+
+return;
+
+}
+
+
+document.getElementById(
+"orderModal"
+).style.display =
+"flex";
+
+
+renderOrderSummary();
+
+}
+
+
+/* =========================
+إغلاق نموذج الطلب
+========================= */
+
+function closeOrderForm(){
+
+document.getElementById(
+"orderModal"
+).style.display =
+"none";
+
+}
+
+
+/* =========================
+عرض بيانات الطلب
+========================= */
+
+function renderOrderSummary(){
+
+const summary =
+document.getElementById(
+"orderSummary"
+);
+
+
+summary.innerHTML =
+"";
+
+
+let total =
+0;
+
+
+cart.forEach(
+
+item=>{
+
+const itemTotal =
+item.price *
+item.quantity;
+
+
+total +=
+itemTotal;
+
+
+summary.innerHTML += `
+
+<div class="order-summary-item">
+
+<span>
+
+${item.name}
+
+</span>
+
+
+<strong>
+
+× ${item.quantity}
+
+</strong>
+
+
+<span>
+
+${itemTotal} ₪
+
+</span>
+
+</div>
+
+`;
+
+}
+
+);
+
+
+document.getElementById(
+"orderFinalTotal"
+).innerText =
+total +
+" ₪";
+
+}
+
+
+/* =========================
+إرسال الطلب إلى واتساب
+========================= */
+
+function sendOrder(){
+
+const name =
+document.getElementById(
+"customerName"
+).value.trim();
+
+
+const phone =
+document.getElementById(
+"customerPhone"
+).value.trim();
+
+
+const table =
+document.getElementById(
+"tableNumber"
+).value.trim();
+
+
+const description =
+document.getElementById(
+"orderDescription"
+).value.trim();
+
+
+if(
+name === "" ||
+phone === "" ||
+table === ""
+){
+
+alert(
+"يرجى تعبئة الاسم والرقم ورقم الطاولة"
+);
+
+return;
+
+}
+
+
+if(cart.length === 0){
+
+alert(
+"السلة فارغة"
+);
+
+return;
+
+}
+
+
+let total =
+0;
+
+
+let itemsText =
+"";
+
+
+cart.forEach(
+
+(item,index)=>{
+
+const itemTotal =
+item.price *
+item.quantity;
+
+
+total +=
+itemTotal;
+
+
+itemsText +=
+
+(index+1) +
+"- " +
+item.name +
+" × " +
+item.quantity +
+" = " +
+itemTotal +
+" ₪\n";
+
+}
+
+);
+
+
+/* رسالة الطلب */
+
+const message =
+
+`*🍴 طلب جديد - تَرَس كافيه*
+
+━━━━━━━━━━━━━━
+
+*بيانات الزبون:*
+
+👤 الاسم: ${name}
+
+📞 الرقم: ${phone}
+
+🪑 رقم الطاولة: ${table}
+
+━━━━━━━━━━━━━━
+
+*الطلب:*
+
+${itemsText}
+
+━━━━━━━━━━━━━━
+
+*💰 السعر النهائي: ${total} ₪*
+
+━━━━━━━━━━━━━━
+
+*📝 الوصف الإضافي:*
+
+${description || "لا يوجد"}
+
+━━━━━━━━━━━━━━
+
+شكراً لاختياركم تَرَس كافيه 🤍`;
+
+
+/* رقم واتساب الجديد */
+
+const whatsappNumber =
+"970598989595";
+
+
+const whatsappURL =
+
+"https://wa.me/" +
+whatsappNumber +
+"?text=" +
+encodeURIComponent(
+message
+);
+
+
+window.open(
+whatsappURL,
+"_blank"
+);
+
+}
+
+
+/* =========================
+إغلاق النوافذ
+========================= */
+
+window.addEventListener(
+
+"click",
+
+function(event){
+
+const cartModal =
+document.getElementById(
+"cartModal"
+);
+
+
+const orderModal =
+document.getElementById(
+"orderModal"
+);
+
+
+if(
+event.target ===
+cartModal
+){
+
+closeCart();
+
+}
+
+
+if(
+event.target ===
+orderModal
+){
+
+closeOrderForm();
+
+}
+
+}
+
+);
+
+</script>
+
+
+<!-- =========================
+نافذة السلة
+========================= -->
+
+<div
+id="cartModal"
+class="modal">
+
+<div
+class="modal-content">
+
+<div
+class="modal-header">
+
+<h2>
+
+🛒 سلة الطلبات
+
+</h2>
+
+
+<button
+class="close-btn"
+onclick="closeCart()">
+
+×
+
+</button>
+
+</div>
+
+
+<div
+id="cartItems"
+class="cart-items">
+
+</div>
+
+
+<div
+class="cart-footer">
+
+<div
+class="total-row">
+
+<span>
+
+السعر النهائي:
+
+</span>
+
+
+<strong
+id="cartTotal">
+
+0 ₪
+
+</strong>
+
+</div>
+
+
+<button
+class="confirm-order-btn"
+onclick="openOrderForm()">
+
+تأكيد الطلب 🍴
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+نافذة بيانات الطلب
+========================= -->
+
+<div
+id="orderModal"
+class="modal">
+
+<div
+class="modal-content order-modal">
+
+<div
+class="modal-header">
+
+<h2>
+
+📋 بيانات الطلب
+
+</h2>
+
+
+<button
+class="close-btn"
+onclick="closeOrderForm()">
+
+×
+
+</button>
+
+</div>
+
+
+<div
+class="order-data">
+
+<h3>
+
+بيانات الزبون
+
+</h3>
+
+
+<input
+type="text"
+id="customerName"
+placeholder="الاسم">
+
+
+<input
+type="tel"
+id="customerPhone"
+placeholder="الرقم">
+
+
+<input
+type="text"
+id="tableNumber"
+placeholder="رقم الطاولة">
+
+
+<h3>
+
+الطلبات
+
+</h3>
+
+
+<div
+id="orderSummary"
+class="order-summary">
+
+</div>
+
+
+<div
+class="final-total">
+
+السعر النهائي:
+
+<strong
+id="orderFinalTotal">
+
+0 ₪
+
+</strong>
+
+</div>
+
+
+<h3>
+
+وصف إضافي
+
+<span>
+
+(اختياري)
+
+</span>
+
+</h3>
+
+
+<textarea
+id="orderDescription"
+placeholder="اكتب أي ملاحظات إضافية هنا..."
+rows="4">
+</textarea>
+
+
+<button
+class="whatsapp-send-btn"
+onclick="sendOrder()">
+
+<span
+class="whatsapp-icon">
+
+☘
+
+</span>
+
+إرسال الطلب عبر واتساب
+
+</button>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<style>
+
+/* =========================
+النوافذ
+========================= */
+
+.modal{
+
+display:none;
+
+position:fixed;
+
+inset:0;
+
+z-index:5000;
+
+background:rgba(
+0,
+0,
+0,
+.82
+);
+
+align-items:center;
+
+justify-content:center;
+
+padding:15px;
+
+}
+
+
+/* محتوى النافذة */
+
+.modal-content{
+
+width:100%;
+
+max-width:650px;
+
+max-height:90vh;
+
+overflow-y:auto;
+
+background:linear-gradient(
+145deg,
+#1a1a1a,
+#0d0d0d
+);
+
+border:1px solid #3a3a3a;
+
+border-radius:22px;
+
+box-shadow:
+0 25px 80px
+rgba(0,0,0,.8);
+
+padding:20px;
+
+}
+
+
+/* عنوان النافذة */
+
+.modal-header{
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+border-bottom:1px solid #333;
+
+padding-bottom:15px;
+
+margin-bottom:15px;
+
+}
+
+
+.modal-header h2{
+
+color:#d4af37;
+
+font-size:25px;
+
+}
+
+
+/* زر الإغلاق */
+
+.close-btn{
+
+width:40px;
+
+height:40px;
+
+border:none;
+
+border-radius:10px;
+
+background:#292929;
+
+color:white;
+
+font-size:25px;
+
+cursor:pointer;
+
+}
+
+
+.close-btn:hover{
+
+background:#c62828;
+
+}
+
+
+/* عناصر السلة */
+
+.cart-items{
+
+display:flex;
+
+flex-direction:column;
+
+gap:10px;
+
+}
+
+
+.cart-item{
+
+display:grid;
+
+grid-template-columns:
+1fr auto auto;
+
+align-items:center;
+
+gap:12px;
+
+padding:15px;
+
+background:#151515;
+
+border:1px solid #292929;
+
+border-radius:14px;
+
+}
+
+
+.cart-item-name{
+
+font-weight:bold;
+
+font-size:17px;
+
+}
+
+
+.cart-item-category{
+
+font-size:12px;
+
+color:#999;
+
+margin-top:4px;
+
+}
+
+
+.cart-item-price{
+
+color:#d4af37;
+
+font-size:14px;
+
+margin-top:6px;
+
+}
+
+
+/* التحكم بالكمية */
+
+.quantity-control{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+}
+
+
+.quantity-control button{
+
+width:32px;
+
+height:32px;
+
+border:none;
+
+border-radius:8px;
+
+background:#d4af37;
+
+color:#111;
+
+font-size:20px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+
+.quantity-control span{
+
+min-width:25px;
+
+text-align:center;
+
+font-weight:bold;
+
+}
+
+
+/* حذف الصنف */
+
+.remove-item{
+
+border:none;
+
+background:#8b1e1e;
+
+color:white;
+
+width:38px;
+
+height:38px;
+
+border-radius:9px;
+
+cursor:pointer;
+
+}
+
+
+.remove-item:hover{
+
+background:#c62828;
+
+}
+
+
+/* السلة فارغة */
+
+.empty-cart{
+
+text-align:center;
+
+padding:50px 20px;
+
+color:#aaa;
+
+font-size:18px;
+
+}
+
+
+/* أسفل السلة */
+
+.cart-footer{
+
+border-top:1px solid #333;
+
+margin-top:18px;
+
+padding-top:18px;
+
+}
+
+
+.total-row{
+
+display:flex;
+
+justify-content:space-between;
+
+font-size:21px;
+
+margin-bottom:18px;
+
+}
+
+
+.total-row strong{
+
+color:#d4af37;
+
+}
+
+
+.confirm-order-btn{
+
+width:100%;
+
+border:none;
+
+background:#d4af37;
+
+color:#111;
+
+padding:15px;
+
+border-radius:12px;
+
+font-size:18px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+
+.confirm-order-btn:hover{
+
+background:#f5d77a;
+
+}
+
+
+/* نموذج الطلب */
+
+.order-data{
+
+display:flex;
+
+flex-direction:column;
+
+gap:12px;
+
+}
+
+
+.order-data h3{
+
+color:#d4af37;
+
+margin-top:8px;
+
+}
+
+
+.order-data h3 span{
+
+font-size:12px;
+
+color:#999;
+
+font-weight:normal;
+
+}
+
+
+.order-data input,
+
+.order-data textarea{
+
+width:100%;
+
+background:#111;
+
+color:#fff;
+
+border:1px solid #333;
+
+border-radius:10px;
+
+padding:13px;
+
+font-family:inherit;
+
+font-size:15px;
+
+outline:none;
+
+}
+
+
+.order-data input:focus,
+
+.order-data textarea:focus{
+
+border-color:#d4af37;
+
+}
+
+
+.order-summary{
+
+display:flex;
+
+flex-direction:column;
+
+gap:8px;
+
+background:#111;
+
+padding:12px;
+
+border-radius:12px;
+
+}
+
+
+.order-summary-item{
+
+display:grid;
+
+grid-template-columns:
+1fr auto auto;
+
+gap:10px;
+
+padding:8px 0;
+
+border-bottom:1px solid #292929;
+
+font-size:14px;
+
+}
+
+
+.order-summary-item strong{
+
+color:#d4af37;
+
+}
+
+
+.final-total{
+
+display:flex;
+
+justify-content:space-between;
+
+font-size:21px;
+
+padding:15px 0;
+
+}
+
+
+.final-total strong{
+
+color:#d4af37;
+
+}
+
+
+/* زر واتساب */
+
+.whatsapp-send-btn{
+
+width:100%;
+
+border:none;
+
+background:#25D366;
+
+color:white;
+
+padding:16px;
+
+border-radius:12px;
+
+font-size:18px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:10px;
+
+margin-top:8px;
+
+}
+
+
+.whatsapp-send-btn:hover{
+
+background:#1ebe5d;
+
+transform:translateY(-2px);
+
+}
+
+
+.whatsapp-icon{
+
+font-size:24px;
+
+}
+
+
+/* الجوال */
+
+@media(max-width:600px){
+
+.modal{
+
+padding:8px;
+
+}
+
+
+.modal-content{
+
+padding:15px;
+
+border-radius:17px;
+
+max-height:94vh;
+
+}
+
+
+.cart-item{
+
+grid-template-columns:
+1fr auto;
+
+}
+
+
+.remove-item{
+
+grid-column:2;
+
+grid-row:1;
+
+}
+
+
+.quantity-control{
+
+grid-column:1 / 3;
+
+justify-content:center;
+
+margin-top:8px;
+
+}
+
+
+.order-summary-item{
+
+grid-template-columns:
+1fr auto;
+
+}
+
+
+.order-summary-item span:last-child{
+
+grid-column:1 / 3;
+
+color:#d4af37;
+
+}
+
+}
+
+</style>
